@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = [
             'name' => "pedro",
@@ -16,6 +16,7 @@ class UserController extends Controller
     }
     public function show($id)
     {
+        $array = [];
 
         dd("id do usuario{{$id}}");
     }
