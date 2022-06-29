@@ -1,43 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('template.users')
+@section('title','Listagem de Usuários')
+@section('content')
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <title>listagem de usuario</title>
-</head>
+<div class="container">
+  <h1>Listagem de Usuários</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
+        <th scope="col">data de cadastro</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($users as $user)
+      <tr>
+        <th scope="row">{{$user->id}}</th>
+        <td>{{$user->name}}</td>
+        <td>{{$user->email}}</td>
+        <td>{{date('d/m/y H:i', strtotime($user->created_at))}}</td>
+        <td><a href="{{route('user.show',$user->id)}}" class="btn btn-info">Visualizar</a></td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
 
-<body>
-  <div class="container">
-    <h1>Listagem de Usuários</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">name</th>
-          <th scope="col">email</th>
-          <th scope="col">data de cadastro</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($users as $user)
-        <tr>
-          <th scope="row">{{$user->id}}</th>
-          <td>{{$user->name}}</td>
-          <td>{{$user->email}}</td>
-          <td>{{date('d/m/y H:i', strtotime($user->created_at))}}</td>
-          <td><a href="{{route('user.show',$user->id)}}" class="btn btn-info">Visualizar</a></td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-
-
-</body>
-
-</html>
+@endsection
