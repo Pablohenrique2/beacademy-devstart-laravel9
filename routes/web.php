@@ -19,14 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('users')->group(
-    function () {
-
-        Route::match(['get', 'post'], '', [UserController::class, 'index'])->name("user.index");
-        Route::match(['get', 'post'], '/{id}', [UserController::class, 'show'])->name("user.show");
-    }
-
-);
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::prefix('viacep')->group(
     function () {

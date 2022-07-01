@@ -15,10 +15,23 @@ class UserController extends Controller
     }
     public function show($id)
     {
-        if (!$user = User::find($id)) {
+        if (!$user = User::find($id))
             return redirect()->route('user.index');
-        }
+
 
         return view('users.show', compact('user'));
+    }
+    public function create()
+    {
+        return view("users.create");
+    }
+    public function store(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->route('users.index');
     }
 }
