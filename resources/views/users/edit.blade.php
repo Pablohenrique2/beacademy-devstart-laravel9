@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
   <h1>editando Usuario: {{$user->name}}</h1>
+  @if($errors->any())
+  <div class="alert alert-danger">
+    @foreach($errors->all() as $error)
+
+    {{$error}} <br>
+
+    @endforeach
+  </div>
+  @endif
   <a href="{{route('users.index')}}" class="btn btn-dark">lista de usuarios</a>
   <form action="{{route('users.update',$user->id)}}" method="post">
     @csrf
