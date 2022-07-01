@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return redirect()->route('user.index');
+            return redirect()->route('users.index');
         }
         return view('users.edit', compact('user'));
     }
@@ -46,13 +46,22 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return redirect()->route('user.index');
+            return redirect()->route('users.index');
         }
         $data = $request->only('name', 'email');
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
         $user->update($data);
+        return redirect()->route('users.index');
+    }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->route('users.index');
+        }
+        $user->delete();
         return redirect()->route('users.index');
     }
 }
