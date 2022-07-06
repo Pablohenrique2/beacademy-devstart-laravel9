@@ -10,6 +10,7 @@
     <thead>
       <tr>
         <th scope="col">id</th>
+        <th scope="col">foto</th>
         <th scope="col">name</th>
         <th scope="col">email</th>
         <th scope="col">data de cadastro</th>
@@ -20,6 +21,11 @@
       @foreach($users as $user)
       <tr>
         <th scope="row">{{$user->id}}</th>
+        @if($user->image)
+        <th><img src="{{asset('storage/'.$user->image)}}" alt="" width="50px" height="50px" class="rounded-circle"></th>
+        @else
+        <th><img src="{{asset('storage/profile/avatar.jpg')}}" alt="" width="50px" height="50px" class="rounded-circle"></th>
+        @endif
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{date('d/m/y H:i', strtotime($user->created_at))}}</td>
@@ -28,6 +34,9 @@
       @endforeach
     </tbody>
   </table>
+  <div class="justify-content-center pagination">
+    {{$users->links('pagination::bootstrap-4')}}
+  </div>
 </div>
 
 @endsection
