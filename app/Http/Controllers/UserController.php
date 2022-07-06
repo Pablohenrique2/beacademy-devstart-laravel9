@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\HTTP\Controllers\store;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUpdateUserFormRequest;
 
 class UserController extends Controller
 {
+    public function __construct(User $user)
+    {
+        $this->model = $user;
+    }
     public function index(Request $request)
     {
 
@@ -29,11 +34,21 @@ class UserController extends Controller
     }
     public function store(StoreUpdateUserFormRequest $request)
     {
-        $user = new User();
+
+        /* $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->image = $request->images;
+        $user->image = store('profile', 'public');
         $user->password = bcrypt($request->password);
-        $user->save();
+        $user->save();*/
+
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        $file = $request['image'];
+        $path = $file->store('profile', 'public');
+        $data['image'] = $path;
+        $this->model->create($data);
         return redirect()->route('users.index');
     }
     public function edit($id)

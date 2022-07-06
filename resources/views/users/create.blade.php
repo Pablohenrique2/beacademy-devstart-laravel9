@@ -14,7 +14,7 @@
   @endif
 
   <a href="{{route('users.index')}}" class="btn btn-dark">lista de usuarios</a>
-  <form action="{{route('users.store')}}" method="post">
+  <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('post')
     <div class="mb-3">
@@ -29,6 +29,10 @@
     <div class="mb-3">
       <label for="password" class="form-label">senha</label>
       <input type="password" name="password" class="form-control" id="password">
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Selecione uma imagem</label>
+      <input type="file" class="form-control form-control-md" id="image" name="image">
     </div>
 
     <button type="submit" class="btn btn-primary">enviar</button>
