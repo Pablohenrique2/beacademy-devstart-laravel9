@@ -12,6 +12,7 @@
     <thead>
       <tr>
         <th scope="col">id</th>
+        <th scope="col">Usuario</th>
         <th scope="col">title</th>
         <th scope="col">post</th>
         <th scope="col">data de cadastro</th>
@@ -22,6 +23,7 @@
       @foreach($posts as $post)
       <tr>
         <td>{{$post->id}}</td>
+        <td>{{$post->user->name}}</td>
         <td>{{$post->title}}</td>
         <td>{{$post->post}}</td>
         <td>{{date('d/m/y H:i', strtotime($post->created_at))}}</td>

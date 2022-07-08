@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::match(['get', 'post'], '/posts', [PostController::class, 'index'])->name('posts.index');
+Route::match(['get', 'post'], '/users/{id}/posts', [PostController::class, 'show'])->name('posts.show');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
