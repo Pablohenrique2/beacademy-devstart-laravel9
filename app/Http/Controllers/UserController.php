@@ -7,6 +7,7 @@ use App\Models\User;
 use App\HTTP\Controllers\store;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Models\Team;
 
 class UserController extends Controller
 {
@@ -16,17 +17,20 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
-
-        $users = User::paginate(5);
-        return view('users.index', compact('users'));
+        $team = Team::find(1);
+        $team->load('users');
+        return $team;
+        // $users = User::paginate(5);
+        // return view('users.index', compact('users'));
     }
     public function show($id)
     {
         if (!$user = User::find($id))
             return redirect()->route('user.index');
 
-
-        return view('users.show', compact('user'));
+        $user->load('teams');
+        return $user;
+        //return view('users.show', compact('user'));
     }
     public function create()
     {
