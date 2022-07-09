@@ -20,6 +20,12 @@
         <li class='nav-item'>
           <a href="#" class="nav-link text-dark">{{Auth::user()->name}}</a>
         </li>
+        @if(Auth::user()->is_admin == 1)
+        <li class='nav-item'>
+          <a href="{{route('admin')}}" class="nav-link text-dark">Dashboard</a>
+        </li>
+        @endif
+
         <li class='nav-item'>
           <form method="POST" action="{{ route('logout') }}">
             @csrf
