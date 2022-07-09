@@ -4,7 +4,23 @@
 
 <div class="container">
   <h1>Listagem de Usuários</h1>
-  <a href="{{route('users.create')}}" class="btn btn-dark">Criar novo usuario</a>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm mt-2 mb-5">
+        <a href="{{route('users.create')}}" class="btn btn-dark">Criar novo usuario</a>
+      </div>
+      <div class="col-sm mt-2 mb-5">
+        <form action="{{route('users.index')}}" method="get">
+          <div class="input-group">
+            <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+            <button type="submit" class="btn btn-outline-primary">Pesquisar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
 
   <table class="table">
     <thead>

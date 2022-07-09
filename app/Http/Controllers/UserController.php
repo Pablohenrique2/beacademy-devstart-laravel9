@@ -17,11 +17,14 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
-        $team = Team::find(1);
-        $team->load('users');
-        return $team;
-        // $users = User::paginate(5);
-        // return view('users.index', compact('users'));
+
+        //$team = Team::find(1);
+        //  $team->load('users');
+        //  return $team;
+        $users = $this->model->getUsers(
+            $request->search ?? ''
+        );
+        return view('users.index', compact('users'));
     }
     public function show($id)
     {
@@ -29,8 +32,8 @@ class UserController extends Controller
             return redirect()->route('user.index');
 
         $user->load('teams');
-        return $user;
-        //return view('users.show', compact('user'));
+        // return $user;
+        return view('users.show', compact('user'));
     }
     public function create()
     {
