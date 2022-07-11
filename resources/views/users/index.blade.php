@@ -4,8 +4,21 @@
 
 <div class="container">
   <h1>Listagem de Usuários</h1>
-
-
+  @if(session()->has('create'))
+  <div class="alert alert-success" role="alert">
+    {{session()->get('create')}}
+  </div>
+  @endif
+  @if(session()->has('edit'))
+  <div class="alert alert-success" role="alert">
+    {{session()->get('edit')}}
+  </div>
+  @endif
+  @if(session()->has('destroy'))
+  <div class="alert alert-danger" role="alert">
+    {{session()->get('destroy')}}
+  </div>
+  @endif
   <div class="container">
     <div class="row">
       <div class="col-sm mt-2 mb-5">
