@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exceptions\UserControllerException;
 use App\Models\User;
 use App\HTTP\Controllers\store;
 use Illuminate\Http\Request;
@@ -28,12 +28,17 @@ class UserController extends Controller
     }
     public function show($id)
     {
-        if (!$user = User::find($id))
-            return redirect()->route('user.index');
-
-        $user->load('teams');
+        // if (!$user = User::find($id))
+        // return redirect()->route('user.index');
+        $user = User::find($id);
+        if ($user) {
+            return view('users.show', compact('user'));
+        } else {
+            throw new UserControllerException('user não encontrado');
+        }
+        //$user->load('teams');
         // return $user;
-        return view('users.show', compact('user'));
+        //return view('users.show', compact('user'));
     }
     public function create()
     {
