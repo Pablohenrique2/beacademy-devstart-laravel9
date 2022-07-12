@@ -63,7 +63,7 @@
 
           <a href="{{route('posts.show',$user->id)}}" class="btn btn-outline-dark">Postagens-{{$user->posts->count()}}</a>
         </td>
-        <td>{{date('d/m/y H:i', strtotime($user->created_at))}}</td>
+        <td>{{formatDateTime($user->created_at)}}</td>
         <td><a href="{{route('users.show',$user->id)}}" class="btn btn-info">Visualizar</a></td>
       </tr>
       @endforeach
